@@ -118,4 +118,45 @@ TEST_CASE("matrix::operator-")
     }
 }
 
+TEST_CASE("matrix::operator* with scalar")
+{
+    // square
+    {
+        matx::matrix<float, 2, 2> m(std::array<float, 4>({1, 2, 3, 4}));
+        auto mr = m * 2;
+        auto ml = 2 * m;
+        CHECK(mr.at(0, 0) == 2);
+        CHECK(mr.at(0, 1) == 4);
+        CHECK(mr.at(1, 0) == 6);
+        CHECK(mr.at(1, 1) == 8);
+        CHECK(ml.at(0, 0) == 2);
+        CHECK(ml.at(0, 1) == 4);
+        CHECK(ml.at(1, 0) == 6);
+        CHECK(ml.at(1, 1) == 8);
+    }
+
+    // col vector
+    {
+        {
+            matx::matrix<float, 2, 1> m(std::array<float, 2>({1, 2}));
+            auto mr = m * 2;
+            auto ml = 2 * m;
+            CHECK(mr.at(0, 0) == 2);
+            CHECK(mr.at(1, 0) == 4);
+            CHECK(ml.at(0, 0) == 2);
+            CHECK(ml.at(1, 0) == 4);
+        }
+
+        {
+            matx::matrix<float, 2, 1> m(std::array<float, 2>({1, 2}));
+            auto mr = m * 2.f;
+            auto ml = 2.f * m;
+            CHECK(mr.at(0, 0) == 2);
+            CHECK(mr.at(1, 0) == 4);
+            CHECK(ml.at(0, 0) == 2);
+            CHECK(ml.at(1, 0) == 4);
+        }
+    }
+}
+
 #endif

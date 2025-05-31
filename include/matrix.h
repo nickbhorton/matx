@@ -88,4 +88,28 @@ auto operator-(matx::matrix<T, Rows, Cols> const& lhs, matx::matrix<T, Rows, Col
     return result;
 }
 
+// scalar * m
+template <typename T, typename U, std::size_t Rows, std::size_t Cols>
+auto operator*(U const& scalar, matx::matrix<T, Rows, Cols> const& m) -> matx::matrix<T, Rows, Cols>
+{
+    matx::matrix<T, Rows, Cols> result{};
+    for (typename matx::matrix<T, Rows, Cols>::size_type i = 0; i < Rows; i++) {
+        for (typename matx::matrix<T, Rows, Cols>::size_type j = 0; j < Cols; j++) {
+            result.at(i, j) = m.at(i, j) * static_cast<T>(scalar);
+        }
+    };
+    return result;
+}
+template <typename T, typename U, std::size_t Rows, std::size_t Cols>
+auto operator*(matx::matrix<T, Rows, Cols> const& m, U const& scalar) -> matx::matrix<T, Rows, Cols>
+{
+    matx::matrix<T, Rows, Cols> result{};
+    for (typename matx::matrix<T, Rows, Cols>::size_type i = 0; i < Rows; i++) {
+        for (typename matx::matrix<T, Rows, Cols>::size_type j = 0; j < Cols; j++) {
+            result.at(i, j) = m.at(i, j) * static_cast<T>(scalar);
+        }
+    };
+    return result;
+}
+
 #endif
