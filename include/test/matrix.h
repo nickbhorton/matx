@@ -183,4 +183,19 @@ TEST_CASE("matrix::operator* with scalar")
     }
 }
 
+TEST_CASE("matrix::operator- negation")
+{
+    // sqaure
+    {
+        matx::matrix<float, 2, 2> m(std::array<float, 4>({1, 2, 3, 4}));
+
+        auto result = -m;
+        for (size_t i = 0; i < result.rows(); i++) {
+            for (size_t j = 0; j < result.cols(); j++) {
+                CHECK(result.at(i, j) == -m.at(i, j));
+            }
+        }
+    }
+}
+
 #endif

@@ -88,6 +88,19 @@ auto operator-(matx::matrix<T, Rows, Cols> const& lhs, matx::matrix<T, Rows, Col
     return result;
 }
 
+// -m
+template <typename T, std::size_t Rows, std::size_t Cols>
+auto operator-(matx::matrix<T, Rows, Cols> const& m) -> matx::matrix<T, Rows, Cols>
+{
+    matx::matrix<T, Rows, Cols> result{};
+    for (typename matx::matrix<T, Rows, Cols>::size_type i = 0; i < Rows; i++) {
+        for (typename matx::matrix<T, Rows, Cols>::size_type j = 0; j < Cols; j++) {
+            result.at(i, j) = -m.at(i, j);
+        }
+    };
+    return result;
+}
+
 // scalar * m
 template <typename T, typename U, std::size_t Rows, std::size_t Cols>
 auto operator*(U const& scalar, matx::matrix<T, Rows, Cols> const& m) -> matx::matrix<T, Rows, Cols>
@@ -112,6 +125,7 @@ auto operator*(matx::matrix<T, Rows, Cols> const& m, U const& scalar) -> matx::m
     return result;
 }
 
+// lhs * rhs
 template <typename T, std::size_t RowsLhs, std::size_t ColsLhsRowsRhs, std::size_t ColsRhs>
 auto operator*(matx::matrix<T, RowsLhs, ColsLhsRowsRhs> const& lhs, matx::matrix<T, ColsLhsRowsRhs, ColsRhs> const& rhs)
     -> matx::matrix<T, RowsLhs, ColsRhs>
@@ -128,6 +142,4 @@ auto operator*(matx::matrix<T, RowsLhs, ColsLhsRowsRhs> const& lhs, matx::matrix
     };
     return result;
 }
-// lhs * rhs
-
 #endif
