@@ -159,4 +159,28 @@ TEST_CASE("matrix::operator* with scalar")
     }
 }
 
+TEST_CASE("matrix::operator* with scalar")
+{
+    // sqaure
+    {
+        matx::matrix<float, 2, 2> lhs(std::array<float, 4>({1, 2, 3, 4}));
+        matx::matrix<float, 2, 2> rhs(std::array<float, 4>({5, 6, 7, 8}));
+
+        auto r = lhs * rhs;
+        CHECK(r.at(0, 0) == 19);
+        CHECK(r.at(0, 1) == 22);
+        CHECK(r.at(1, 0) == 43);
+        CHECK(r.at(1, 1) == 50);
+    }
+    // matrix * col
+    {
+        matx::matrix<float, 2, 2> lhs(std::array<float, 4>({1, 2, 3, 4}));
+        matx::matrix<float, 2, 1> rhs(std::array<float, 2>({5, 6}));
+
+        auto r = lhs * rhs;
+        CHECK(r.at(0, 0) == 17);
+        CHECK(r.at(1, 0) == 39);
+    }
+}
+
 #endif

@@ -112,4 +112,22 @@ auto operator*(matx::matrix<T, Rows, Cols> const& m, U const& scalar) -> matx::m
     return result;
 }
 
+template <typename T, std::size_t RowsLhs, std::size_t ColsLhsRowsRhs, std::size_t ColsRhs>
+auto operator*(matx::matrix<T, RowsLhs, ColsLhsRowsRhs> const& lhs, matx::matrix<T, ColsLhsRowsRhs, ColsRhs> const& rhs)
+    -> matx::matrix<T, RowsLhs, ColsRhs>
+{
+    matx::matrix<T, RowsLhs, ColsRhs> result{};
+    for (typename matx::matrix<T, RowsLhs, ColsRhs>::size_type i = 0; i < RowsLhs; i++) {
+        for (typename matx::matrix<T, RowsLhs, ColsRhs>::size_type j = 0; j < ColsRhs; j++) {
+            T val{};
+            for (typename matx::matrix<T, RowsLhs, ColsRhs>::size_type k = 0; k < ColsLhsRowsRhs; k++) {
+                val += lhs.at(i, k) * rhs.at(k, j);
+            }
+            result.at(i, j) = val;
+        }
+    };
+    return result;
+}
+// lhs * rhs
+
 #endif
