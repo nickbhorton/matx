@@ -33,8 +33,8 @@ public:
     matrix& operator=(matrix&& other) noexcept { return *this = matrix(std::move(other)); }
 
     // get at elements
-    reference at(size_type r, size_type c) { return data[r * Cols + c]; }
-    const_reference at(size_type r, size_type c) const { return data[r * Cols + c]; }
+    reference at(size_type r, size_type c = 0) { return data[r * Cols + c]; }
+    const_reference at(size_type r, size_type c = 0) const { return data[r * Cols + c]; }
 
     // structure
     size_type rows() { return Rows; }
